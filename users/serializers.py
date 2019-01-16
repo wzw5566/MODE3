@@ -45,7 +45,12 @@ class UserDetailSerializer(serializers.ModelSerializer):
     用户详情序列表类
     """
     # role = serializers.CharField(source="role.role_name", read_only=True)
-    role = serializers.StringRelatedField(many=True)
+    # role = serializers.StringRelatedField(many=True)
+    role = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='role_name'
+     )
     class Meta:
         model = User
         fields = ("id", "username", "name", "role", "avatar")
