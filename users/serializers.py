@@ -49,12 +49,14 @@ class UserRegisterSerializer(serializers.ModelSerializer):
                 r = Role.objects.create(name=role['role_name'])
                 user.role.add(r)
     def create(self, validated_data):
+         print(validated_data)
+         roles = validated_data["role"]
          user = super(UserRegisterSerializer, self).create(validated_data= validated_data)
          user.set_password(validated_data["password"])
-         user.save()
-         roles = validated_data.pop('roles')
+         print(roles)
          if roles is not None:
              self.addtag(roles, user)
+         user.save()
          return user
     class Meta:
          model = User

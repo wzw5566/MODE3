@@ -44,6 +44,7 @@ class UserViewset(CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveMode
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        print(request.data )
         serializer.is_valid(raise_exception=True)
         user = self.perform_create(serializer)
 
